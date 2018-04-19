@@ -1,0 +1,12 @@
+.container{
+    min-width: 348px;
+    width:70%;
+    margin-bottom: auto;
+}
+
+.todos-list{
+    font-size: 100%;
+    list-style: none;
+    width: 100%;
+    overflow-x: hidden;
+}

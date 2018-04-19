@@ -1,0 +1,70 @@
+.todo{
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5;
+    padding: 1rem 0 1rem 0;
+    
+}
+
+.todo-data_title{
+    font-weight: bolder;
+    font-size: 23px;
+    margin-left: 10px;
+}
+
+.todo-data_description{
+    display: block;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 10px 5px 10px 5px;
+    background-color: rgba(240, 243, 223, 0.411);
+}
+
+.edit-todo{
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-todo__input_title{
+    margin-top: 20px;
+    font-weight: bolder;
+    font-size: 23px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.edit-todo__input_description{
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 20px 0px 20px 0px;
+    height: 50px;
+}
+
+.fa-plus {
+    padding-left: 10px;
+}
+
+.fa-times, .fa-check, .fa-edit{
+    padding-left: 10px;
+}
+
+li+li{
+    border-top: 1px solid black;
+}
+
+.red {
+    color: #e74c3c;
+}
+
+.green {
+    color: green;
+}
+
+.opacity{
+    opacity: 0.3;
+}
+
+.more-opacity{
+    opacity: 0.0;
+}
