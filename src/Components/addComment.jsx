@@ -15,6 +15,10 @@ export class AddComment extends Component {
     }
   };
 
+  componentDidMount(props){
+    this.input.current.value = this.props.comment;
+  }
+
   render() {
     return (
       <textarea

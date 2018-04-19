@@ -62,6 +62,12 @@ export class TodosList extends Component {
      });
   }
 
+  handleRemoveTodoElem (id){
+    this.setState({
+      list: removeTodoElem(this.state.list, id),
+    })
+  }
+
   render() {
     const { list } = this.state;
     return (
@@ -77,6 +83,7 @@ export class TodosList extends Component {
                 onClickLike={this.handleLike.bind(this)}
                 onAddingComment={this.handleAddingComment.bind(this)}
                 onEditItem = {this.handleEditItem.bind(this)}
+                removeItem = {(id) => this.handleRemoveTodoElem(id)}
                 />);
             })
             } 
