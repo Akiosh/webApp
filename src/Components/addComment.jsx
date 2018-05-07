@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 export class AddComment extends Component {
   constructor(props) {
@@ -7,22 +7,22 @@ export class AddComment extends Component {
   }
 
   handleKeyDown = event => {
-    if (event.key == "Enter") {
+    if (event.key == 'Enter') {
       const { value } = this.input.current;
-      this.input.current.value = "";
+      this.input.current.value = '';
       this.props.addComment(value);
       event.preventDefault();
     }
   };
 
-  componentDidMount(props){
-    this.input.current.value = this.props.comment;
+  componentDidMount(){
+    this.input.current.value = this.props.getComment();
   }
 
   render() {
     return (
       <textarea
-        className="add-todo__input-comment"
+        className='add-todo__input-comment'
         ref={this.input}
         onKeyDown={this.handleKeyDown}
       />

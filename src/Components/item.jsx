@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import style from "../css/item.css"
-import { AddComment } from "./addComment.jsx";
+import React, { Component } from 'react';
+import style from '../css/item.css'
+import { AddComment } from './addComment.jsx';
 
 
 
@@ -12,7 +12,7 @@ export class Item extends Component {
         this.state = {
             isCommenting : false,
             hasComment: this.props.comment ? true : false,
-            completed: false,
+            isCompleted: this.props.isCompleted,
             isEdit: false
         }
     }
@@ -29,8 +29,9 @@ export class Item extends Component {
     }
 
     onClickComleted(){
+        this.props.onClickCompleted(this.props.id,!this.state.isCompleted);
         this.setState({
-            comleted: !this.state.comleted,
+            isCompleted: !this.state.isCompleted,
         });
     }
 
@@ -44,6 +45,13 @@ export class Item extends Component {
             isEdit: !this.state.isEdit,
         });
     }
+
+    getComment (){
+        if (this.state.hasComment) 
+            return this.props.comment; 
+        else 
+            return '';
+    }
     
     render () {
         const {
@@ -56,42 +64,41 @@ export class Item extends Component {
             onAddingComment,
             removeItem
         } = this.props;
-        console.log(title + "   " + description + " ");
         return(
-            <li className = {"todo " + (this.state.comleted ? "opacity" : "")}>
+            <li className = {'todo ' + (this.state.isCompleted ? 'opacity' : '')}>
                 {this.state.isEdit    
-                    ?<div className = "edit-todo">
-                        <input className="edit-todo__input_title" ref={this.titleInput} defaultValue = {title}/>
-                        <textarea className="edit-todo__input_description" ref={this.descriptionInput}  defaultValue = {description}/>
+                    ?<div className = 'edit-todo'>
+                        <input className='edit-todo__input_title' ref={this.titleInput} defaultValue = {title}/>
+                        <textarea className='edit-todo__input_description' ref={this.descriptionInput}  defaultValue = {description}/>
                     </div>
-                    :<div className = "todo-data">
-                        <span className = "todo-data_title">{title}</span>
-                        <span className="todo-data_description">{description}</span>
+                    :<div className = 'todo-data'>
+                        <span className = 'todo-data_title'>{title}</span>
+                        <span className='todo-data_description'>{description}</span>
                     </div> 
                 }
-                <span>{this.state.hasComment && ("Comment: " + this.props.comment)}</span>
-                <div className ="item-options">
-                    <div class = "item-icon">
-                        <i onClick = {!this.state.comleted && (() => onClickLike(id, !isLiked))}
-                        className={"fa fa-heart " + (isLiked ? "red " : "") + (this.state.comleted ? "more-opacity " : "")}
+                <span>{this.state.hasComment && ('Comment: ' + this.props.comment)}</span>
+                <div className ='item-options'>
+                    <div class = 'item-icon'>
+                        <i onClick = {!this.state.isCompleted && (() => onClickLike(id, !isLiked))}
+                        className={'fa fa-heart ' + (isLiked ? 'red ' : '') + (this.state.isCompleted ? 'more-opacity ' : '')}
                         />
-                        <i onClick = {!this.state.comleted && (() => this.onClickComment())}
-                        className={"fa fa-plus " + (this.state.isCommenting ? "red " : "") + (this.state.comleted ? "more-opacity " : "")}
+                        <i onClick = {!this.state.isCompleted && (() => this.onClickComment())}
+                        className={'fa fa-plus ' + (this.state.isCommenting ? 'red ' : '') + (this.state.isCompleted ? 'more-opacity ' : '')}
                         />
-                        {this.state.comleted 
+                        {this.state.isCompleted 
                             ?<i onClick = {!this.state.isCommenting && !this.state.isEdit && (() => this.onClickComleted())}
-                            className={"fa fa-check green " }
+                            className={'fa fa-check green ' }
                             />
                             : <i onClick = {!this.state.isCommenting && !this.state.isEdit && (() => this.onClickComleted())} 
-                            className={"fa fa-times red "}/>
+                            className={'fa fa-times red '}/>
                         }
-                        <i onClick = {!this.state.comleted && (() => this.onClickEdit())}
-                            className={"fa fa-edit " + (this.state.isEdit ? "green " : "") + (this.state.comleted ? "more-opacity " : "")}
+                        <i onClick = {!this.state.isCompleted && (() => this.onClickEdit())}
+                            className={'fa fa-edit ' + (this.state.isEdit ? 'green ' : '') + (this.state.isCompleted ? 'more-opacity ' : '')}
                         />
                     </div>
-                    <button className = "delete-item" onClick = {() => {removeItem(id)}}>Delete</button>
+                    <button className = 'delete-item' onClick = {() => {removeItem(id)}}>Delete</button>
                 </div>
-                {this.state.isCommenting && <AddComment addComment = {this.onAddingComment.bind(this)} comment = {this.props.comment}/>}
+                {this.state.isCommenting && <AddComment addComment = {this.onAddingComment.bind(this)} getComment = {this.getComment.bind(this)}/>}
             </li>
         );
     }
